@@ -1,97 +1,69 @@
+import styled from "styled-components";
+import { lazy, Suspense, useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { useEffect, useRef, lazy, Suspense } from "react";
 
-import styled, { ThemeProvider } from "styled-components";
+import img from "../assets/Images/patrick-tomasso-Oaqk7qqNh_c-unsplash.jpg";
+import { Blogs } from "./BlogData";
 
-import { YinYang } from "./AllSvgs";
-import { Work } from "./WorkData";
-import { DarkTheme, mediaQueries } from "./Themes";
-
-import Card from "../subComponents/Card";
+import BlogComponent from "./BlogComponent";
 import Loading from "../subComponents/Loading";
+import { mediaQueries } from "./Themes";
 
+const AnchorComponent = lazy(() => import("../subComponents/Anchor"));
 const SocialIcons = lazy(() => import("../subComponents/SocialIcons"));
 const PowerButton = lazy(() => import("../subComponents/PowerButton"));
 const LogoComponent = lazy(() => import("../subComponents/LogoComponent"));
 const BigTitle = lazy(() => import("../subComponents/BigTitle"));
 
-const Box = styled(motion.div)`
-  background-color: ${(props) => props.theme.body};
-  position: relative;
-  display: flex;
-  height: 400vh;
+const MainContainer = styled(motion.div)`
+  background-image: url(${img});
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
 `;
 
-const Main = styled(motion.ul)`
-  position: fixed;
-  top: 12rem;
-  left: calc(10rem + 15vw);
+const Container = styled.div`
+  background-color: ${(props) => `rgba(${props.theme.bodyRgba},0.8)`};
 
-  height: 40vh;
-  /* height:200vh; */
-  //border:1px solid white;
+  //width:100vw;
+  width: 100%;
+  height: auto;
+  position: relative;
+  padding-bottom: 5rem;
+`;
 
+const Center = styled.div`
   display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 10rem;
+
+  ${mediaQueries(30)`
+    padding-top: 7rem;
+    
+  
+  `};
+`;
+
+const Grid = styled(motion.div)`
+  display: grid;
+  grid-template-columns: repeat(2, minmax(calc(10rem + 15vw), 1fr));
+
+  grid-gap: calc(1rem + 2vw);
 
   ${mediaQueries(50)`
-        
-        
-        left:calc(8rem + 15vw);
+    grid-template-columns: 100%;
 
-  `};
-
-  ${mediaQueries(40)`
-  top: 30%;
-        
-        left:calc(6rem + 15vw);
-
-  `};
-
-  ${mediaQueries(40)`
-        
-        left:calc(2rem + 15vw);
-
-  `};
-  ${mediaQueries(25)`
-        
-        left:calc(1rem + 15vw);
-
+    
+  
   `};
 `;
 
-const Rotate = styled.span`
-  display: block;
-  position: fixed;
-  right: 1rem;
-  bottom: 1rem;
-  width: 80px;
-  height: 80px;
-
-  z-index: 1;
-  ${mediaQueries(40)`
-     width:60px;
-         height:60px;   
-       svg{
-         width:60px;
-         height:60px;
-       }
-
-  `};
-  ${mediaQueries(25)`
-        width:50px;
-         height:50px;
-        svg{
-         width:50px;
-         height:50px;
-       }
-
-  `};
-`;
 const container = {
   hidden: { opacity: 0 },
   show: {
     opacity: 1,
-
     transition: {
       staggerChildren: 0.5,
       duration: 0.5,
@@ -100,53 +72,40 @@ const container = {
 };
 
 const WorkPage = () => {
-  const ref = useRef(null);
-
-  const yinyang = useRef(null);
+  const [number, setNumber] = useState(0);
 
   useEffect(() => {
-    let element = ref.current;
-
-    const rotate = () => {
-      element.style.transform = `translateX(${-window.pageYOffset}px)`;
-
-      return (yinyang.current.style.transform =
-        "rotate(" + -window.pageYOffset + "deg)");
-    };
-
-    window.addEventListener("scroll", rotate);
-    return () => {
-      window.removeEventListener("scroll", rotate);
-    };
+    let num = (window.innerHeight - 70) / 30;
+    setNumber(parseInt(num));
   }, []);
-
   return (
-    <ThemeProvider theme={DarkTheme}>
-      <Suspense fallback={<Loading />}>
-        <Box
-          key="work"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1, transition: { duration: 1 } }}
-          exit={{ opacity: 0, transition: { duration: 0.5 } }}
-        >
-          <LogoComponent theme="dark" />
+    <Suspense fallback={<Loading />}>
+      <MainContainer
+        variants={container}
+        initial="hidden"
+        animate="show"
+        exit={{ opacity: 0, transition: { duration: 0.5 } }}
+      >
+        <Container>
+          <LogoComponent />
+
           <PowerButton />
-          <SocialIcons theme="dark" />
 
-          <Main ref={ref} variants={container} initial="hidden" animate="show">
-            {Work.map((d) => (
-              <Card key={d.id} data={d} />
-            ))}
-          </Main>
+          <SocialIcons />
+          <AnchorComponent number={number} />
 
-          <BigTitle text="WORK" top="10%" right="20%" />
+          <Center>
+            <Grid variants={container} initial="hidden" animate="show">
+              {Blogs.map((blog) => (
+                <BlogComponent key={blog.id} blog={blog} />
+              ))}
+            </Grid>
+          </Center>
 
-          <Rotate ref={yinyang}>
-            <YinYang width={80} height={80} fill={DarkTheme.text} />
-          </Rotate>
-        </Box>
-      </Suspense>
-    </ThemeProvider>
+          <BigTitle text="BLOG" top="5rem" left="5rem" />
+        </Container>
+      </MainContainer>
+    </Suspense>
   );
 };
 

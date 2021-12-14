@@ -2,18 +2,20 @@ export const Blogs = [
     {
         id:1,
         name:"Indicio.tech",
-        tags:["react","styled-components"],
+        desc:"- Designed / coded web software for decentralized identity applications using ReactJS, NodeJS and Express",
+        desc2:"- Contributed to an open source Aries Enterprise Agent",
+        desc3:"- Used back / front end code to interact with HTTP and Websocket APIs",
+        desc4:"- Worked closely with product team on scope of future projects and innovations",
+        desc5:"- Carried out continuous identification measurement and improvement of processes",
+        desc6:"- Used Jira for development planning and issue tracking",
         date:"5 July, 2021",
-        imgSrc:"https://media-exp1.licdn.com/dms/image/C4D0BAQFhW9UDfN2Gfg/company-logo_200_200/0/1631648050560?e=1647475200&v=beta&t=UqWGHu1YTxZcmPDAcHXEISizge9_XR3Dv1s3bZNbenI",
-        link:"https://indicio.tech/"
     },
     {
         id:2,
-        name:"How to create React Hamburger Menu using Styled-Components",
-        tags:["react","styled-components"],
+        name:"Flylance",
+        description:"- Designed / coded web software for decentralized identity applications using ReactJS, NodeJS and Express",
+        description2:"- Contributed to an open source Aries Enterprise Agent",
         date:"5 July, 2021",
-        imgSrc:"https://codebucks.hashnode.dev/_next/image?url=https%3A%2F%2Fcdn.hashnode.com%2Fres%2Fhashnode%2Fimage%2Fupload%2Fv1625479747640%2F7KzwP9nmj.png%3Fw%3D1600%26h%3D840%26fit%3Dcrop%26crop%3Dentropy%26auto%3Dcompress%2Cformat%26format%3Dwebp&w=1920&q=75",
-        link:"https://codebucks.hashnode.dev/react-hamburger-menu"
     },
     {
         id:3,

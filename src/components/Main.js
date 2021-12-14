@@ -8,6 +8,7 @@ import { YinYang } from "./AllSvgs";
 import Intro from "./Intro";
 import Loading from "../subComponents/Loading";
 import { mediaQueries } from "./Themes";
+import Resume from "../assets/Images/Resume.png"
 
 const PowerButton = lazy(() => import("../subComponents/PowerButton"));
 const SocialIcons = lazy(() => import("./../subComponents/SocialIcons"));
@@ -100,7 +101,7 @@ const Contact = styled(NavLink)`
   text-decoration: none;
   z-index: 1;
 `;
-const BLOG = styled(NavLink)`
+const WORK = styled(NavLink)`
   color: ${(props) => (props.click ? props.theme.body : props.theme.text)};
   position: absolute;
   top: 50%;
@@ -113,7 +114,7 @@ const BLOG = styled(NavLink)`
     text-shadow: ${(props) => (props.click ? "0 0 4px #000" : "none")};
   }
 `;
-const WORK = styled(NavLink)`
+const SITES = styled(NavLink)`
   color: ${(props) => (props.click ? props.theme.body : props.theme.text)};
   position: absolute;
   top: 50%;
@@ -274,7 +275,7 @@ const Main = () => {
           )}
 
           {mq ? (
-            <BLOG click={+click} onClick={() => setpath("blog")} to="/blog">
+            <WORK click={+click} to="">
               <motion.h2
                 initial={{
                   y: -200,
@@ -287,11 +288,11 @@ const Main = () => {
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
               >
-                Blog
+                Hello!
               </motion.h2>
-            </BLOG>
+            </WORK>
           ) : (
-            <BLOG click={+false} onClick={() => setpath("blog")} to="/blog">
+            <WORK click={+click} to="">
               <motion.h2
                 initial={{
                   y: -200,
@@ -304,14 +305,14 @@ const Main = () => {
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
               >
-                Blog
+                Hello!
               </motion.h2>
-            </BLOG>
+            </WORK>
           )}
 
-          <WORK click={+click} to="/work">
+          <SITES click={+click} to="/sites">
             <motion.h2
-              onClick={() => setpath("work")}
+              onClick={() => setpath("sites")}
               initial={{
                 y: -200,
                 transition: { type: "spring", duration: 1.5, delay: 1 },
@@ -323,9 +324,9 @@ const Main = () => {
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
             >
-              Work
+              Sites
             </motion.h2>
-          </WORK>
+          </SITES>
 
           <BottomBar>
             <ABOUT

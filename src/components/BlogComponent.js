@@ -8,7 +8,7 @@ const Box = styled(motion(NavLink))`
   box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
   text-decoration: none;
   width: calc(10rem + 15vw);
-  height: 20rem;
+  height: 25rem;
   border: 2px solid ${(props) => props.theme.text};
   padding: 1rem;
   color: ${(props) => props.theme.text};
@@ -31,39 +31,20 @@ const Box = styled(motion(NavLink))`
   `};
   ${mediaQueries(30)`
     
-    height:18rem;
+    height:25rem;
 
   `};
 
   ${mediaQueries(25)`
     
-    height:14rem;
+    height:20rem;
     padding:0.8rem;
     backdrop-filter: none;
 
   `};
 `;
 
-const Image = styled.div`
-  background-image: ${(props) => `url(${props.img})`};
-  width: 100%;
-  height: 60%;
-  background-size: cover;
-  border: 1px solid transparent;
-  background-position: center center;
-  ${mediaQueries(25)`
-    
-    height:70%;
-
-
-  `};
-
-  ${Box}:hover & {
-    border: 1px solid ${(props) => props.theme.body};
-  }
-`;
-
-const Title = styled.h3`
+const Title = styled.h1`
   color: inherit;
   padding: 0.5rem 0;
   padding-top: 1rem;
@@ -88,8 +69,9 @@ const Title = styled.h3`
     border-bottom: 1px solid ${(props) => props.theme.body};
   }
 `;
-const HashTags = styled.div`
-  padding: 0.5rem 0;
+
+const Date = styled.span`
+  padding-top: 1rem;
   ${mediaQueries(25)`
     
     font-size:calc(0.5em + 1vw);
@@ -98,15 +80,21 @@ const HashTags = styled.div`
 
   `};
 `;
-const Tag = styled.span`
-  padding-right: 0.5rem;
-`;
 
-const Date = styled.span`
-  padding: 0.5rem 0;
+const Description = styled.h4`
+  font-size: calc(0.8em + 0.3vw);
+  padding-top: 1rem;
+  /* padding-bottom: .5rem; */
+  font-family: "Karla", sans-serif;
+  font-weight: 500;
   ${mediaQueries(25)`
-    
-    font-size:calc(0.5em + 1vw);
+  font-size:calc(0.7em + 0.3vw);
+
+
+
+  `};
+  ${mediaQueries(20)`
+  font-size:calc(0.6em + 0.3vw);
 
 
 
@@ -120,17 +108,17 @@ const item = {
 };
 
 const BlogComponent = (props) => {
-  const { name, tags, date, imgSrc, link } = props.blog;
+  const { name, desc, desc2, desc3, desc4, desc5, desc6, date, link } = props.blog;
   return (
     <Container variants={item}>
       <Box target="_blank" to={{ pathname: `${link}` }}>
-        <Image img={imgSrc} />
         <Title>{name}</Title>
-        <HashTags>
-          {tags.map((t, id) => (
-            <Tag key={id}>#{t}</Tag>
-          ))}
-        </HashTags>
+        <Description>{desc}</Description>
+        <Description>{desc2}</Description>
+        <Description>{desc3}</Description>
+        <Description>{desc4}</Description>
+        <Description>{desc5}</Description>
+        <Description>{desc6}</Description>
         <Date>{date}</Date>
       </Box>
     </Container>
